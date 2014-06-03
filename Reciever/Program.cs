@@ -5,9 +5,9 @@ using System.Text;
 using System.Net;
 using System.Net.Sockets;
 
-namespace Reciever
+namespace Receiver
 {
-    class RecieveMain
+    class Receiver
     {
         static void Main(string[] args)
         {

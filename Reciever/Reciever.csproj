@@ -7,7 +7,7 @@
     <ProjectGuid>{F3CBC730-C434-479E-B9FE-CB60F05ABD54}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Reciever</RootNamespace>
+    <RootNamespace>Receiver</RootNamespace>
     <AssemblyName>Reciever</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

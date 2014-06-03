@@ -3,3 +3,8 @@ c:\Users\Nikko\Documents\Dev\C#\UDP\Reciever\bin\Debug\Reciever.pdb
 c:\Users\Nikko\Documents\Dev\C#\UDP\Reciever\obj\Debug\Reciever.csprojResolveAssemblyReference.cache
 c:\Users\Nikko\Documents\Dev\C#\UDP\Reciever\obj\Debug\Reciever.exe
 c:\Users\Nikko\Documents\Dev\C#\UDP\Reciever\obj\Debug\Reciever.pdb
+C:\Users\Nikko\Documents\Dev\Message-Me\Reciever\obj\Debug\Reciever.exe
+C:\Users\Nikko\Documents\Dev\Message-Me\Reciever\obj\Debug\Reciever.pdb
+C:\Users\Nikko\Documents\Dev\Message-Me\Reciever\bin\Debug\Reciever.exe
+C:\Users\Nikko\Documents\Dev\Message-Me\Reciever\bin\Debug\Reciever.pdb
+C:\Users\Nikko\Documents\Dev\Message-Me\Reciever\obj\Debug\Reciever.csprojResolveAssemblyReference.cache
