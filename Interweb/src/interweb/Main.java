@@ -16,7 +16,7 @@ public class Main {
 	}
 		
 	private static void Receive() throws IOException{
-		DatagramPacket receivedPacket=new DatagramPacket(new byte[20],20);
+		DatagramPacket receivedPacket=new DatagramPacket(new byte[1024],1024);
 		
 		System.out.println("Receiving");
 		socket.receive(receivedPacket);
@@ -24,7 +24,7 @@ public class Main {
 		String s=new String(receivedPacket.getData()).trim();
 		System.out.println("Received: "+s);
 		
-		if (s.equalsIgnoreCase("EXIT")){
+		if (s.equalsIgnoreCase("snsd")){
 			Send(receivedPacket,"GOODBYE");
 			System.out.println("Now exiting");
 			socket.close();
