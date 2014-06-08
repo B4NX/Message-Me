@@ -3,8 +3,3 @@ c:\users\nikko\Documents\Dev\C#\UDP\UDP\bin\Debug\UDP.pdb
 c:\users\nikko\Documents\Dev\C#\UDP\UDP\obj\Debug\Sender.csprojResolveAssemblyReference.cache
 c:\users\nikko\Documents\Dev\C#\UDP\UDP\obj\Debug\UDP.exe
 c:\users\nikko\Documents\Dev\C#\UDP\UDP\obj\Debug\UDP.pdb
-C:\Users\Nikko\Documents\Dev\Message-Me\UDP\obj\Debug\UDP.exe
-C:\Users\Nikko\Documents\Dev\Message-Me\UDP\obj\Debug\UDP.pdb
-C:\Users\Nikko\Documents\Dev\Message-Me\UDP\bin\Debug\UDP.exe
-C:\Users\Nikko\Documents\Dev\Message-Me\UDP\bin\Debug\UDP.pdb
-C:\Users\Nikko\Documents\Dev\Message-Me\UDP\obj\Debug\Sender.csprojResolveAssemblyReference.cache

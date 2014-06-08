@@ -5,29 +5,45 @@ import java.net.*;
 
 public class Main {
 
+	public static DatagramSocket socket;
 	public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stub
 		System.out.println("Starting");
-		DatagramSocket socket=new DatagramSocket(12142);
-		byte[] receivedData = new byte[1024];
-		byte[] sendData=new byte[1024];
+		socket=new DatagramSocket(777);
 		
-		while(true){
-			DatagramPacket receivedPacket =new DatagramPacket(receivedData,receivedData.length);
-			socket.receive(receivedPacket);
-			String sentence=new String(receivedPacket.getData());
-			System.out.println("Received: "+sentence);
-			
-			InetAddress address=receivedPacket.getAddress();
-			int port= receivedPacket.getPort();
-			
-			String capitalizedSentence=sentence.toUpperCase();
-			sendData=capitalizedSentence.getBytes();
-			
-			DatagramPacket sendPacket=new DatagramPacket(sendData,sendData.length,address,port);
-			socket.send(sendPacket);
-			
+		int i=3;
+		while(i!=0){
+			Receive();
+			--i;
+		}
+		socket.close();
+		System.out.println("Ending");
+	}
+		
+	private static void Receive() throws IOException{
+		DatagramPacket receivedPacket=new DatagramPacket(new byte[20],20);
+		
+		System.out.println("Receiving");
+		socket.receive(receivedPacket);
+		
+		String s=new String(receivedPacket.getData()).trim();
+		System.out.println("Received: "+s);
+		
+		CheckEnd(s);
+		
+		Send(receivedPacket,s.toUpperCase());
+	}
+	private static void CheckEnd(String s){
+		if (s.equalsIgnoreCase("EXIT")){
+			System.out.println("Now exiting");
+			socket.close();
+			System.out.println("Goodbye");
+			System.exit(0);
 		}
 	}
+	private static void Send(DatagramPacket packet,String s) throws IOException {
+		DatagramPacket sendpacket=new DatagramPacket(s.getBytes(),s.getBytes().length,packet.getAddress(),packet.getPort());
 
+		System.out.println("Sending");
+		socket.send(sendpacket);
+	}
 }
