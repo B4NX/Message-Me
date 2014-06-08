@@ -14,10 +14,13 @@ namespace Sender
             UdpClient sender = new UdpClient(666);
             IPAddress address = getAddress();
             Console.WriteLine(address);
-            sender.Connect(new IPEndPoint(address, 7777));
+            sender.Connect(new IPEndPoint(address, 777));
 
             byte[] wat = { 1, 2, 3, 4, 5, 6, 7, 8, 89, 9 };
+            //byte[] wat = Encoding.UTF8.GetBytes("i'm a little tea pot");
             sender.Send(wat, wat.Length);
+
+
             Console.WriteLine("Done");
             Console.ReadKey();
         }

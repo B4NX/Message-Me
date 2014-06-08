@@ -12,10 +12,10 @@ namespace Receiver
         static void Main(string[] args)
         {
             UdpClient client = new UdpClient();
-            client.Client.Bind(new IPEndPoint(IPAddress.Any, 666));
+            client.Client.Bind(new IPEndPoint(IPAddress.Any, 777));
             IPEndPoint endPoint = null;
             byte[] mssg = null;
-            while (mssg==null)
+            while (mssg == null)
             {
                 mssg = client.Receive(ref endPoint);
             }
@@ -30,6 +30,13 @@ namespace Receiver
             {
                 Console.WriteLine(b);
             }
+        }
+
+        static void ReceiveStuff(Socket s)
+        {
+            byte[] data = new byte[5];
+
+            s.BeginReceive(data, 0, 5, SocketFlags.None, null, new Object());
         }
     }
 }
