@@ -19,3 +19,16 @@
 *.exe
 *.out
 *.app
+
+# Linker logs
+*.tlog
+*.log
+
+# Other random stuff
+*.idb
+*.pdb
+*.ilk
+*.class
+*.cache
+*.pch
+*.sdf
