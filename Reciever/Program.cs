@@ -4,39 +4,88 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace Receiver
 {
     class Receiver
     {
+        static Queue<Message> dataQueue;
+        static bool exit = false;
         static void Main(string[] args)
         {
-            UdpClient client = new UdpClient();
-            client.Client.Bind(new IPEndPoint(IPAddress.Any, 777));
-            IPEndPoint endPoint = null;
-            byte[] mssg = null;
-            while (mssg == null)
+            dataQueue = new Queue<Message>();
+
+            Thread receiveThread = new Thread(new ThreadStart(Receive));
+            receiveThread.Start();
+
+            Message m;
+            string s;
+            while (true)
             {
-                mssg = client.Receive(ref endPoint);
+                if (dataQueue.Count == 0)
+                {
+                    continue;
+                }
+                m = dataQueue.Dequeue();
+
+                s = ParseData(m.Data);
+                if (s.ToUpper() == "EXIT")
+                {
+                    exit = true;
+                    break;
+                }
             }
-            PrintMessage(mssg);
             Console.WriteLine("Done");
             Console.ReadKey();
         }
 
-        static void PrintMessage(byte[] mssg)
+        static void Receive()
         {
-            foreach (byte b in mssg)
+            UdpClient reader = new UdpClient();
+            reader.Client.Bind(new IPEndPoint(IPAddress.Any, 777));
+            IPEndPoint remote;
+            byte[] mssg;
+
+            while (!exit)
             {
-                Console.WriteLine(b);
+                remote = null;
+                mssg = null;
+                while (mssg == null)
+                {
+                    mssg = reader.Receive(ref remote);
+                }
+                dataQueue.Enqueue(new Message(mssg, remote));
+            }
+            reader.Close();
+        }
+        static string ParseData(byte[] b)
+        {
+            return Encoding.UTF8.GetString(b);
+        }
+    }
+    struct Message
+    {
+        readonly byte[] data;
+        readonly IPEndPoint endPoint;
+        public Message(byte[] _data, IPEndPoint _endPoint)
+        {
+            this.data = _data;
+            this.endPoint = _endPoint;
+        }
+        public byte[] Data
+        {
+            get
+            {
+                return this.data;
             }
         }
-
-        static void ReceiveStuff(Socket s)
+        public IPEndPoint EndPoint
         {
-            byte[] data = new byte[5];
-
-            s.BeginReceive(data, 0, 5, SocketFlags.None, null, new Object());
+            get
+            {
+                return this.endPoint;
+            }
         }
     }
 }

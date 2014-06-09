@@ -9,9 +9,10 @@ namespace Sender
 {
     class SendMain
     {
+        static UdpClient sender;
         static void Main(string[] args)
         {
-            UdpClient sender = new UdpClient(666);
+            sender = new UdpClient(666);
             IPAddress address = getAddress();
             Console.WriteLine(address);
             sender.Connect(new IPEndPoint(address, 777));
@@ -21,16 +22,17 @@ namespace Sender
             byte[] wat = Encoding.UTF8.GetBytes(s);
             sender.Send(wat, wat.Length);
 
-
             Console.WriteLine("Done Sending");
             
             IPEndPoint remote = null;
             byte[] data = sender.Receive(ref remote);
-            Console.WriteLine(parseData(data));
+            
+            Console.WriteLine(ParseData(data));
 
             Console.WriteLine("Done");
             Console.ReadKey();
         }
+
         /// <summary>
         /// Asks for the IP from the User
         /// </summary>
@@ -41,7 +43,7 @@ namespace Sender
             string ip = Console.ReadLine();
 
             IPAddress address;
-            if (ip.ToUpper() == "localhost")
+            if (ip.ToUpper() == "LOCALHOST")
             {
                 return IPAddress.Loopback;
             }
@@ -82,7 +84,7 @@ namespace Sender
         /// </summary>
         /// <param name="b">Byte array to get the string from</param>
         /// <returns>String represented by the given array</returns>
-        static string parseData(byte[] b)
+        static string ParseData(byte[] b)
         {
             return Encoding.UTF8.GetString(b);
         }
