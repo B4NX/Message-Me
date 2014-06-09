@@ -37,9 +37,10 @@ namespace Sender
         /// <returns>The IPAddress provided by the user</returns>
         static IPAddress getAddress()
         {
-            Console.Write("Enter the IP address to connnect to: ");
+            Console.Write("Enter the Address to connnect to: ");
             string ip = Console.ReadLine();
 
+            IPAddress address;
             if (ip.ToUpper() == "localhost")
             {
                 return IPAddress.Loopback;
@@ -48,12 +49,24 @@ namespace Sender
             {
                 return IPAddress.Loopback;
             }
-            IPAddress address;
-            if (!IPAddress.TryParse(ip, out address))
+            else if (IPAddress.TryParse(ip, out address))
             {
-                address = IPAddress.Loopback;
+                return address;
             }
-            return address;
+            else
+            {
+                try
+                {
+                    return Dns.GetHostEntry(ip).AddressList[0];
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    Console.ReadKey();
+                    Environment.Exit(0);
+                }
+            }
+            return IPAddress.Loopback;
         }
         /// <summary>
         /// Gets an array of bytes representing the string
