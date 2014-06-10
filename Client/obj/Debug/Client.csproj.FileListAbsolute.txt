@@ -1,0 +1,5 @@
+C:\Users\Nikko\Documents\Dev\Message-Me\Client\bin\Debug\Client.exe
+C:\Users\Nikko\Documents\Dev\Message-Me\Client\bin\Debug\Client.pdb
+C:\Users\Nikko\Documents\Dev\Message-Me\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
+C:\Users\Nikko\Documents\Dev\Message-Me\Client\obj\Debug\Client.exe
+C:\Users\Nikko\Documents\Dev\Message-Me\Client\obj\Debug\Client.pdb

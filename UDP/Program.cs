@@ -23,6 +23,7 @@ namespace Sender
             sender.Send(wat, wat.Length);
 
             Console.WriteLine("Done Sending");
+            Console.WriteLine("Receiving");
             
             IPEndPoint remote = null;
             byte[] data = sender.Receive(ref remote);

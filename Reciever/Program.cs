@@ -35,6 +35,7 @@ namespace Receiver
                     exit = true;
                     break;
                 }
+                Console.WriteLine(s);
             }
             Console.WriteLine("Done");
             Console.ReadKey();
