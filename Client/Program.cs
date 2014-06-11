@@ -25,6 +25,8 @@ namespace Client
             sendThread.Start();
             Receive();
 
+            sendThread.Abort();
+
             //Thread receiveThread = new Thread(new ThreadStart(Receive));
             //receiveThread.Start();
             //Send();
