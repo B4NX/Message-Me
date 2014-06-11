@@ -10,12 +10,14 @@ namespace Client
 {
     class Program
     {
-        static UdpClient client;
+        static volatile UdpClient client;
 
         //static Queue<Message> sendQueue, receiveQueue;
         static bool exit = false;
         static void Main(string[] args)
         {
+            client = new UdpClient();
+            client.Client.Bind(new IPEndPoint(IPAddress.Any, 666));
             //receiveQueue = new Queue<Message>();
             //sendQueue = new Queue<Message>();
 
@@ -31,8 +33,6 @@ namespace Client
 
         static void Receive()
         {
-            UdpClient reader = new UdpClient();
-            reader.Client.Bind(new IPEndPoint(IPAddress.Any, 777));
             IPEndPoint remote;
             byte[] mssg;
 
@@ -43,35 +43,40 @@ namespace Client
                 mssg = null;
                 while (mssg == null)
                 {
-                    mssg = reader.Receive(ref remote);
+                    mssg = client.Receive(ref remote);
                 }
 
                 s = Encoding.UTF8.GetString(mssg);
                 Console.WriteLine(s);
                 if (s.ToUpper() == "EXIT")
                 {
+                    Console.WriteLine("Exiting");
                     exit = true;
                     break;
                 }
                 Console.CursorLeft = 0;
-                Console.WriteLine(s);
+                Console.WriteLine("Received: {0}",s);
+                Console.Write("\nMessage: ");
             }
-            reader.Close();
         }
 
         static void Send()
         {
-            UdpClient sender = new UdpClient(666);
             IPAddress address = getAddress();
             Console.WriteLine("Address to connect to is: {0}", address);
-            sender.Connect(new IPEndPoint(address, 777));
+            client.Connect(new IPEndPoint(address, 777));
 
+            Console.Write("\nMessage: ");
+
+            string s;
             while (!exit)
             {
-                byte[] data = Encoding.UTF8.GetBytes(Console.ReadLine());
-                sender.Send(data, data.Length);
+                s = Console.ReadLine();
+                byte[] data = Encoding.UTF8.GetBytes(s);
+                Console.WriteLine("Sending: {0}", s);
+                client.Send(data, data.Length);
             }
-
+            client.Close();
         }
         /// <summary>
         /// Asks for the IP from the User
