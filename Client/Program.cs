@@ -19,9 +19,13 @@ namespace Client
             //receiveQueue = new Queue<Message>();
             //sendQueue = new Queue<Message>();
 
-            //Thread sendThread = new Thread(new ThreadStart(Send));
-            Thread receiveThread = new Thread(new ThreadStart(Receive));
-            Send();
+            Thread sendThread = new Thread(new ThreadStart(Send));
+            sendThread.Start();
+            Receive();
+
+            //Thread receiveThread = new Thread(new ThreadStart(Receive));
+            //receiveThread.Start();
+            //Send();
 
         }
 
@@ -41,8 +45,9 @@ namespace Client
                 {
                     mssg = reader.Receive(ref remote);
                 }
-                
+
                 s = Encoding.UTF8.GetString(mssg);
+                Console.WriteLine(s);
                 if (s.ToUpper() == "EXIT")
                 {
                     exit = true;
