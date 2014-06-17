@@ -20,7 +20,7 @@ namespace Client
             client.Client.Bind(new IPEndPoint(IPAddress.Any, 666));
             //receiveQueue = new Queue<Message>();
             //sendQueue = new Queue<Message>();
-
+            
             Thread sendThread = new Thread(new ThreadStart(Send));
             sendThread.Start();
             Receive();
