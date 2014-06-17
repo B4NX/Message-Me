@@ -30,7 +30,7 @@ namespace Client
             //Thread receiveThread = new Thread(new ThreadStart(Receive));
             //receiveThread.Start();
             //Send();
-
+            Console.ReadLine();
         }
 
         static void Receive()
@@ -66,7 +66,7 @@ namespace Client
         {
             IPAddress address = getAddress();
             Console.WriteLine("Address to connect to is: {0}", address);
-            client.Connect(new IPEndPoint(address, 777));
+            client.Connect(new IPEndPoint(address, 666));
 
             Console.Write("\nMessage: ");
 
